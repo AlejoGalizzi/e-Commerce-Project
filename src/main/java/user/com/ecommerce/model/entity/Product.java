@@ -1,7 +1,6 @@
 package user.com.ecommerce.model.entity;
 
 import java.sql.Timestamp;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -30,40 +30,33 @@ public class Product {
   @Column(name = "SKU")
   private String sku;
 
-  @Column(name = "NAME")
-  @NotBlank
+  @Column(name = "NAME",nullable = false)
   private String name;
 
   @Column(name = "DESCRIPTION")
   private String description;
 
-  @Column(name = "UNIT_PRICE")
-  @NotBlank
+  @Column(name = "UNIT_PRICE", nullable = false)
   private float unitPrice;
 
   @Column(name = "IMAGE_URL")
   private String imageUrl;
 
-  @Column(name = "ACTIVE")
-  @NotBlank
+  @Column(name = "ACTIVE", nullable = false)
   private boolean active;
 
-  @Column(name = "UNITS_IN_STOCK")
-  @NotBlank
+  @Column(name = "UNITS_IN_STOCK", nullable = false)
   private Integer unitsInStock;
 
-  @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "CATEGORY_ID")
-  @NotBlank
   private Category category;
 
   @Column(name = "DATE_CREATED")
   @CreationTimestamp
-  @NotBlank
   private Timestamp dateCreated;
 
   @Column(name = "LAST_UPDATED")
-  @CreationTimestamp
-  @NotBlank
+  @UpdateTimestamp
   private Timestamp dateUpdated;
 }
