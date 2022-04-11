@@ -5,6 +5,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import user.com.ecommerce.model.entity.Category;
 import user.com.ecommerce.model.entity.Product;
 
 @Configuration
@@ -18,7 +19,12 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
     config.getExposureConfiguration()
         .forDomainType(Product.class)
-        .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions))
-        .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions));
+        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
+
+    config.getExposureConfiguration()
+        .forDomainType(Category.class)
+        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
   }
 }
