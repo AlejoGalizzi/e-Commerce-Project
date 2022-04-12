@@ -20,7 +20,7 @@ public class ProductSeeder implements CommandLineRunner {
       "Internet of Things (IoT) - Getting Started", "The Go Programming Language: A to Z");
   private static final List<String> DESCRIPTION_PRODUCT = List.of("Learn JavaScript",
       "Learn Spring", "Learn Kubernetes", "Learn IoT", "Learn Go");
-  private static final String IMAGEURL_PRODUCT = "placeholder.png";
+  private static final String IMAGEURL_PRODUCT = "assets/images/products/placeholder.png";
   private static final Boolean ACTIVE_PRODUCT = true;
   private static final Integer UNITS_IN_STOCK = 100;
   private static final List<Float> PRICE_UNIT = List.of(19.99F, 29.99F, 24.99F, 29.99F, 24.99F);
