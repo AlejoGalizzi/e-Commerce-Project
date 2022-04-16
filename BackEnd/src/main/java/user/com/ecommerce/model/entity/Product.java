@@ -17,11 +17,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "SLIDE_ID", nullable = false)
-  private Long productoId;
+  @Column(name = "PRODUCT_ID", nullable = false)
+  private Long productId;
 
   @Column(name = "SKU")
   private String sku;
