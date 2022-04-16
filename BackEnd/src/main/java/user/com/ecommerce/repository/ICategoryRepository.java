@@ -9,5 +9,4 @@ import user.com.ecommerce.model.entity.Category;
 @CrossOrigin("http://localhost:4200")
 public interface ICategoryRepository extends JpaRepository<Category,Long> {
 
-  Category findByName(String name);
 }
