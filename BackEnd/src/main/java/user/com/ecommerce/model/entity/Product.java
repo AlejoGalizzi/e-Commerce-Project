@@ -10,18 +10,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Data
+
 @Entity
 @Table(name = "PRODUCT")
+@Setter
+@Getter
 public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "SLIDE_ID", nullable = false)
-  private Long productoId;
+  @Column(name = "PRODUCT_ID", nullable = false)
+  private Long productId;
 
   @Column(name = "SKU")
   private String sku;
