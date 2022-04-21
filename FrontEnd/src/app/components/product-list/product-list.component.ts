@@ -39,7 +39,7 @@ export class ProductListComponent implements OnInit {
         data => {
           this.products = data;
         }
-      )
+      );
   }
 
   handleListComponent(){
@@ -53,6 +53,6 @@ export class ProductListComponent implements OnInit {
       data => {
         this.products = data;
       }
-    )
+    );
   }
 }
