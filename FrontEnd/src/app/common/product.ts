@@ -7,6 +7,6 @@ export class Product {
   imageUrl: string;
   active: boolean;
   unitsInStock: number;
-  dateCreated:Date;
-  dateUpdated:Date;
+  dateCreated: Date;
+  dateUpdated: Date;
 }

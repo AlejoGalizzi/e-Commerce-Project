@@ -14,13 +14,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 
 const routes: Routes = [
-  {path: 'category/:id/:name',component: ProductListComponent},
-  {path: 'products/:id', component: ProductDetailsComponent},
-  {path: 'category',component: ProductListComponent},
-  {path: 'products',component: ProductListComponent},
-  {path: 'search/:keyword', component: ProductListComponent},
-  {path: '', redirectTo: '/products',pathMatch:'full'},
-  {path: '**',redirectTo:'/products',pathMatch: 'full'}
+  { path: 'category/:id/:name', component: ProductListComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'category', component: ProductListComponent },
+  { path: 'products', component: ProductListComponent },
+  { path: 'search/:keyword', component: ProductListComponent },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '**', redirectTo: '/products', pathMatch: 'full' }
 ];
 
 @NgModule({

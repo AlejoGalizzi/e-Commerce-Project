@@ -11,9 +11,9 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailsComponent implements OnInit {
 
   product: Product = new Product();
-  currentProductId:number;
+  currentProductId: number;
 
-  constructor(private productService: ProductService,private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
