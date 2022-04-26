@@ -1,17 +1,12 @@
 Welcome to my e-Commerce page.
 
-These are the first products in the web page:
+The web app originaly is empty but you could load 100 rows with the script located in the backend folder.
 
-| Sku                     | Name                                       | Description      | Image URL                              | Active | Units in Stock | Price per Unit | Category ID |
-|-------------------------|--------------------------------------------|------------------|----------------------------------------|--------|----------------|----------------|-------------|
-| BOOK-TECH-1000          | JavaScript - The Fun Parts                 | Learn JavaScript | assets/images/products/placeholder.png | 1      | 100            | 19.99          | 1           |
-| BOOK-TECH-1001          | Spring Framework Tutorial                  | Learn Spring     | assets/images/products/placeholder.png | 1      | 100            | 29.99          | 1           |
-| BOOK-TECH-1002          | Kubernetes - Deploying Containers          | Learn Kubernetes | assets/images/products/placeholder.png | 1      | 100            | 24.99          | 1           |
-| BOOK-TECH-1003          | Internet of Things (IoT) - Getting Started | Learn IoT        | assets/images/products/placeholder.png | 1      | 100            | 29.99          | 1           |
-| BOOK-TECH-1004          | The Go Programming Language: A to Z        | Learn Go         | assets/images/products/placeholder.png | 1      | 100            | 24.99          | 1           |
+Step to load the rows: 
 
-And the initial categories: 
+1 - Open with your graphic interface (in my case MySQL Workbench) the script located in: BackEnd\src\main\resources\static\ .
+2 - Run the lines 4,5 and 6 on the script.
+3 - Run spring-boot server using your IDE.
+4 - Run the rest of the lines on the script. Then you are going to have 100 products sorted in 4 categories.
 
-| Category Name |
-|---------------|
-| BOOKS         |
+The web page is dinamic, so if you want to add categories or products to the database, it will be automatically updated on the web page.
