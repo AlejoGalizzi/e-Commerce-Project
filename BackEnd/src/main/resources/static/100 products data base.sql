@@ -2,9 +2,9 @@
 -- Schema full-stack-ecommerce
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `ecommerce`;
-
 CREATE SCHEMA `ecommerce`;
 USE `ecommerce` ;
+
 -- -----------------------------------------------------
 -- Categories
 -- -----------------------------------------------------
@@ -12,7 +12,6 @@ INSERT INTO category(name) VALUES ('Books');
 INSERT INTO category(name) VALUES ('Coffee Mugs');
 INSERT INTO category(name) VALUES ('Mouse Pads');
 INSERT INTO category(name) VALUES ('Luggage Tags');
-INSERT INTO category(name) VALUES ('Chairs');
 
 -- -----------------------------------------------------
 -- Books
@@ -129,8 +128,3 @@ INSERT INTO product (sku, name, description, image_url, active, units_in_stock, 
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1022', 'Luggage Tag - Sunset', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1022.png', 1, 100, 16.99, 4, NOW());
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1023', 'Luggage Tag - Flames', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1023.png', 1, 100, 16.99, 4, NOW());
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1024', 'Luggage Tag - Countryside', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1024.png', 1, 100, 16.99, 4, NOW());
-
--- -----------------------------------------------------
--- Luggage Tags
--- -----------------------------------------------------
-INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('CHAIR-1025', 'Chair - Woddie', 'This chair is made of wood', 'assets/images/products/placeholder.png', 1, 100, 16.99, 6, NOW());
