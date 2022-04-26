@@ -27,6 +27,20 @@ export class CartService {
     }
     this.computeCartTotals();
   }
+  
+  decrementQuanqtity(cartItem: CartItem){
+    cartItem.quantity--;
+    if(cartItem.quantity == 0){
+      this.remove(cartItem);
+    }else this.computeCartTotals();
+  }
+
+  remove(cartItem: CartItem) {
+    if(this.cartItems.indexOf(cartItem)> -1){
+      this.cartItems.splice(this.cartItems.indexOf(cartItem),1);
+    }
+  }
+
   computeCartTotals() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
