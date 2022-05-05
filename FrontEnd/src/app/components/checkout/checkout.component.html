@@ -32,13 +32,173 @@
             </div>
           </div>
 
-          <div class="text-center">
-            <div class="col-md-9"></div>
-            <button type="submit" class="btn btn-info mt-3">Purchase</button>
+        </div>
+        <div formGroupName="shippingAddress" class="form-area">
+          <h3>Shipping Address</h3>
+          <div class="row">
+            <div class="col-md-2"><label for="country">Country</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="country" id="country">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="street">Street</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="street" id="street" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="city">City</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="city" id="city" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="state">State</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="state" id="state">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="zip">Zip Code</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="zipCode" id="zip" type="text">
+              </div>
+            </div>
           </div>
         </div>
 
+        <div class="input-space">
+          <label class="au-checkbox">
+            <input type="checkbox" (change)="copyShippingAdressToBillingAddress($event)">
+            <span class="au-checkmark"></span>Billing Address same as Shipping Address
+          </label>
+        </div>
 
+        <div formGroupName="billingAddress" class="form-area">
+          <h3>Billing Address</h3>
+          <div class="row">
+            <div class="col-md-2"><label for="country">Country</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="country" id="country">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="street">Street</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="street" id="street" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="city">City</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="city" id="city" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="state">State</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="state" id="state">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="zip">Zip Code</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="zipCode" id="zip" type="text">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div formGroupName="creditCard" class="form-area">
+          <h3>Credit Card</h3>
+          <div class="row">
+            <div class="col-md-2"><label>Card Type</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="cardType">
+                  <option value="example">Visa</option>
+                  <option value="example">MasterCard</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="name">Name of the Card</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="cardName" id="name" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="number">Number of the Card</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="cardNumber" id="number" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label>Security Code</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input  formControlName="cardNumber" id="number" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label>Expiration Month</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="expirationMonth">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label>Expiration Year</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="expirationYear">
+                  <option value="example">To Do</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <div class="col-md-9"></div>
+          <button type="submit" class="btn btn-info mt-3">Purchase</button>
+        </div>
       </form>
     </div>
   </div>
