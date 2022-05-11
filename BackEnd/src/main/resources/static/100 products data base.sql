@@ -5,6 +5,22 @@ DROP SCHEMA IF EXISTS `ecommerce`;
 CREATE SCHEMA `ecommerce`;
 USE `ecommerce` ;
 
+CREATE TABLE country (
+	id smallint unsigned not null AUTO_INCREMENT unique,
+    code varchar(2) default null,
+    name varchar(255) default null,
+    primary key (id)
+) Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE state (
+	id smallint not null AUTO_INCREMENT unique,
+    name varchar(255) default null,
+    country_id smallint	unsigned not null,
+    primary key (id),
+    key fk_country (country_id),
+    constraint fk_country foreign key (country_id) REFERENCES country (id)
+) Engine=InnoDB AUTO_INCREMENT = 1;
+
 -- -----------------------------------------------------
 -- Categories
 -- -----------------------------------------------------
@@ -12,6 +28,18 @@ INSERT INTO category(name) VALUES ('Books');
 INSERT INTO category(name) VALUES ('Coffee Mugs');
 INSERT INTO category(name) VALUES ('Mouse Pads');
 INSERT INTO category(name) VALUES ('Luggage Tags');
+
+-- -----------------------------------------------------
+-- Countries
+-- -----------------------------------------------------
+INSERT INTO country(code,name) VALUES
+('AR','Argentina'),
+('BR','Brazil'),
+('CA','Canada'),
+('DE','Germany'),
+('IN','India'),
+('TR','Turkey'),
+('US','United States');
 
 -- -----------------------------------------------------
 -- Books
@@ -128,3 +156,4 @@ INSERT INTO product (sku, name, description, image_url, active, units_in_stock, 
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1022', 'Luggage Tag - Sunset', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1022.png', 1, 100, 16.99, 4, NOW());
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1023', 'Luggage Tag - Flames', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1023.png', 1, 100, 16.99, 4, NOW());
 INSERT INTO product (sku, name, description, image_url, active, units_in_stock, unit_price, category_id,date_created) VALUES ('LUGGAGETAG-1024', 'Luggage Tag - Countryside', 'This luggage tag will help you identify your luggage. The luggage tag is very unique and it will stand out from the crowd. The luggage tag is created out of a rugged and durable plastic. Buy this luggage tag now to make it easy to identify your luggage!', 'assets/images/products/luggagetags/luggagetag-luv2code-1024.png', 1, 100, 16.99, 4, NOW());
+
