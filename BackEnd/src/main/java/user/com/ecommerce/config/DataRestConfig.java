@@ -28,27 +28,19 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
     HttpMethod[] unsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE};
 
-    config.getExposureConfiguration()
-        .forDomainType(Product.class)
-        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
-        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
-
-    config.getExposureConfiguration()
-        .forDomainType(Category.class)
-        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
-        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
-
-    config.getExposureConfiguration()
-        .forDomainType(Country.class)
-        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
-        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
-
-    config.getExposureConfiguration()
-        .forDomainType(State.class)
-        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
-        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
+    disableHttpMethods(Product.class,config, unsupportedActions);
+    disableHttpMethods(Category.class,config, unsupportedActions);
+    disableHttpMethods(Country.class,config, unsupportedActions);
+    disableHttpMethods(State.class,config, unsupportedActions);
 
     exposeIds(config);
+  }
+
+  private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {
+    config.getExposureConfiguration()
+        .forDomainType(theClass)
+        .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions))
+        .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedActions));
   }
 
   private void exposeIds(RepositoryRestConfiguration config) {
