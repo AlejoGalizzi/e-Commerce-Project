@@ -56,12 +56,7 @@ export class CheckoutComponent implements OnInit {
 
     const startWith: number = new Date().getMonth() + 1;
     console.log("Stat Month: "+ startWith);
-    this.shopFormService.getCreditCardMonths(startWith).subscribe(
-      data => {
-        console.log("Retrieve card months: " + JSON.stringify(data));
-        this.creditCardMonths = data;
-      }
-    );
+    this.setMonthsArray(startWith);
 
     this.shopFormService.getCreditCardYears().subscribe(
       data => {
@@ -69,6 +64,24 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
+
+  handleMonthAndYears(){
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup.value.expirationYear);
+
+    let startMonth: number;
+
+    if(currentYear === selectedYear){
+      startMonth = new Date().getMonth() + 1;
+    }else{
+      startMonth = 1;
+    }
+
+    this.setMonthsArray(startMonth);
+  }
+
   onSubmit  (){
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')!.value);
@@ -82,6 +95,15 @@ export class CheckoutComponent implements OnInit {
     else{
       this.checkoutFormGroup.controls['billingAddress'].reset();
     }
+  }
+
+  setMonthsArray(startMonth: number) {
+    this.shopFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieve card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    );
   }
 
 }
