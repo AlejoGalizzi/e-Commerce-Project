@@ -11,8 +11,8 @@ export class ShopFormService {
   getCreditCardMonths(startMonth: number) : Observable<number[]> {
     
     let data: number[] = [];
-
-    for (let month = startMonth; month < 12; month++) {
+    
+    for (let month = startMonth; month <= 12; month++) {
       data.push(month);
     }
 

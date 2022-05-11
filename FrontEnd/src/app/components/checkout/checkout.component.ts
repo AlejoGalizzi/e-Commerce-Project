@@ -12,7 +12,7 @@ export class CheckoutComponent implements OnInit {
 
   checkoutFormGroup: FormGroup;
 
-  creditCardMonth: number[] = [];
+  creditCardMonths: number[] = [];
   creditCardYears: number[] = [];
 
 
@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
     this.shopFormService.getCreditCardMonths(startWith).subscribe(
       data => {
         console.log("Retrieve card months: " + JSON.stringify(data));
-        this.creditCardMonth = data;
+        this.creditCardMonths = data;
       }
     );
 
