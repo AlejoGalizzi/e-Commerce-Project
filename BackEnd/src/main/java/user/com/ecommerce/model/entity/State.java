@@ -6,12 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name= "STATE")
+@Table(name = "STATE")
 @Entity
 @Getter
 @Setter
@@ -19,13 +19,13 @@ public class State {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "STATE_ID",nullable = false)
+  @Column(name = "STATE_ID", nullable = false)
   private long id;
 
   @Column(name = "NAME", unique = true)
   private String name;
 
-  @ManyToMany
+  @ManyToOne
   @JoinColumn(name = "COUNTRY_ID")
   private Country country;
 }
