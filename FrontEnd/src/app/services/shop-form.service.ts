@@ -45,13 +45,9 @@ export class ShopFormService {
     );
   }
 
-  getStateList(countryCode: number): Observable<State[]>{
+  getStateList(countryCode: string): Observable<State[]>{
     const url = `${this.stateUrl}/search/findByCountryCode?code=${countryCode}`;
 
-    return this.getStates(url);
-  }
-
-  getStates(url: string): Observable<State[]>{
     return this.httpClient.get<GetResponseState>(url).pipe(
       map(response => response._embedded.states)
     );
