@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Event } from '@angular/router';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 
 @Component({
@@ -14,6 +16,9 @@ export class CheckoutComponent implements OnInit {
 
   creditCardMonths: number[] = [];
   creditCardYears: number[] = [];
+  countries: Country[] = [];
+  shippingStates: State[] = [];
+  billingStates: State[] = [];
 
 
   totalPrice: number = 0;
@@ -58,6 +63,12 @@ export class CheckoutComponent implements OnInit {
     console.log("Stat Month: "+ startWith);
     this.setMonthsArray(startWith);
 
+    this.shopFormService.getCountryList().subscribe(
+      data => {
+        this.countries = data;
+      }
+    )
+
     this.shopFormService.getCreditCardYears().subscribe(
       data => {
         this.creditCardYears = data;
@@ -82,15 +93,38 @@ export class CheckoutComponent implements OnInit {
     this.setMonthsArray(startMonth);
   }
 
+  handleStates(formGroupName: string){
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const countryCode = formGroup.value.country.code;
+
+    this.shopFormService.getStateList(countryCode).subscribe(
+      data => {
+        if(formGroupName == 'shippingAddress'){
+          this.shippingStates = data;
+        }else{
+          this.billingStates = data;
+        }
+
+        formGroup.get('state').setValue(data[0]);
+      }
+    )
+  }
+
   onSubmit  (){
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')!.value);
+    console.log("The email address is"+ this.checkoutFormGroup.get('customer').value.email);
+    console.log("The shipping address country is: "+this.checkoutFormGroup.get('shippingAddress').value.country.name);
+    console.log("The shipping address state is: "+this.checkoutFormGroup.get('shippingAddress').value.state.name);
+    
+    
   }
 
   copyShippingAdressToBillingAddress(event){
     if(event.target.checked){
       this.checkoutFormGroup.controls['billingAddress']
           .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
+      this.billingStates = this.shippingStates;
     }
     else{
       this.checkoutFormGroup.controls['billingAddress'].reset();
