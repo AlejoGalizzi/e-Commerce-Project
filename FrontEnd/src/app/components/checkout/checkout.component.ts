@@ -157,7 +157,7 @@ export class CheckoutComponent implements OnInit {
     
   }
 
-  copyShippingAdressToBillingAddress(event) {
+  copyShippingAddressToBillingAddress(event) {
     if (event.target.checked) {
       this.checkoutFormGroup.controls['billingAddress']
         .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
