@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event } from '@angular/router';
 import { Country } from 'src/app/common/country';
+import { CustomValidators } from 'src/app/validators/custom-validators';
 import { State } from 'src/app/common/state';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 
@@ -31,11 +32,18 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        firstName: new FormControl('', 
+          [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace]),
+        lastName: new FormControl('',
+          [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace]),
         email: new FormControl('',
           [Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2-4}$')])
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2-4}$'),
+          CustomValidators.notOnlyWhiteSpace])
       }),
       shippingAddress: this.formBuilder.group({
         country: [''],
