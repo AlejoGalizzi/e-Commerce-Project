@@ -127,7 +127,12 @@ export class CheckoutComponent implements OnInit {
     console.log("The shipping address country is: " + this.checkoutFormGroup.get('shippingAddress').value.country.name);
     console.log("The shipping address state is: " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
 
+    if(this.checkoutFormGroup.invalid){
+      this.checkoutFormGroup.markAllAsTouched();
+    }
 
+    console.log("CheckoutFormGroup is valid: "+ this.checkoutFormGroup.valid);
+    
   }
 
   copyShippingAdressToBillingAddress(event) {
