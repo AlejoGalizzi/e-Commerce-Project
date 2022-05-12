@@ -47,21 +47,35 @@ export class CheckoutComponent implements OnInit {
       }),
       shippingAddress: this.formBuilder.group({
         country: [''],
-        street: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        street: new FormControl('', [Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notOnlyWhiteSpace]),
+        city: new FormControl('', [Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notOnlyWhiteSpace]),
         state: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2)])
+        zipCode: new FormControl('', [Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notOnlyWhiteSpace])
       }),
       billingAddress: this.formBuilder.group({
         country: [''],
-        street: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        street: new FormControl('', [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace]),
+        city: new FormControl('', [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace]),
         state: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2)])
+        zipCode: new FormControl('', [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace])
       }),
       creditCard: this.formBuilder.group({
         cardType: [''],
-        cardName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        cardName: new FormControl('', [Validators.required,
+            Validators.minLength(2),
+            CustomValidators.notOnlyWhiteSpace]),
         cardNumber: new FormControl('',
           [Validators.required,
           Validators.pattern('^[0-9]*$'),
@@ -163,14 +177,20 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  get firstName() {
-    return this.checkoutFormGroup.get('customer.firstName');
-  }
-  get lastName() {
-    return this.checkoutFormGroup.get('customer.lastName');
-  }
-  get email() {
-    return this.checkoutFormGroup.get('customer.email');
-  }
+  get firstName() {return this.checkoutFormGroup.get('customer.firstName');}
+  get lastName() {return this.checkoutFormGroup.get('customer.lastName');}
+  get email() {return this.checkoutFormGroup.get('customer.email');}
+  get shippingStreet() {return this.checkoutFormGroup.get('shippingAddress.street');}
+  get shippingCity() {return this.checkoutFormGroup.get('shippingAddress.city');}
+  get shippingState() {return this.checkoutFormGroup.get('shippingAddress.state');}
+  get shippingZipCode() {return this.checkoutFormGroup.get('shippingAddress.zipCode');}
+  get billingStreet() {return this.checkoutFormGroup.get('billing.street');}
+  get billingCity() {return this.checkoutFormGroup.get('billing.city');}
+  get billingState() {return this.checkoutFormGroup.get('billing.state');}
+  get billingZipCode() {return this.checkoutFormGroup.get('billing.zipCode');}
+  get cardType() {return this.checkoutFormGroup.get('creditCard.cardType');}
+  get cardName() {return this.checkoutFormGroup.get('creditCard.cardName');}
+  get cardNumber() {return this.checkoutFormGroup.get('creditCard.cardNumber');}
+  get securityCode() {return this.checkoutFormGroup.get('creditCard.securityCode');}
 
 }
