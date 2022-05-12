@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit {
           CustomValidators.notOnlyWhiteSpace])
       }),
       shippingAddress: this.formBuilder.group({
-        country: [''],
+        country: new FormControl('', [Validators.required]),
         street: new FormControl('', [Validators.required,
           Validators.minLength(2),
           CustomValidators.notOnlyWhiteSpace]),
@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
           CustomValidators.notOnlyWhiteSpace])
       }),
       billingAddress: this.formBuilder.group({
-        country: [''],
+        country: new FormControl('', [Validators.required]),
         street: new FormControl('', [Validators.required,
             Validators.minLength(2),
             CustomValidators.notOnlyWhiteSpace]),
@@ -182,12 +182,14 @@ export class CheckoutComponent implements OnInit {
   get email() {return this.checkoutFormGroup.get('customer.email');}
   get shippingStreet() {return this.checkoutFormGroup.get('shippingAddress.street');}
   get shippingCity() {return this.checkoutFormGroup.get('shippingAddress.city');}
+  get shippingCountry() {return this.checkoutFormGroup.get('shippingAddress.country');}
   get shippingState() {return this.checkoutFormGroup.get('shippingAddress.state');}
   get shippingZipCode() {return this.checkoutFormGroup.get('shippingAddress.zipCode');}
-  get billingStreet() {return this.checkoutFormGroup.get('billing.street');}
-  get billingCity() {return this.checkoutFormGroup.get('billing.city');}
-  get billingState() {return this.checkoutFormGroup.get('billing.state');}
-  get billingZipCode() {return this.checkoutFormGroup.get('billing.zipCode');}
+  get billingStreet() {return this.checkoutFormGroup.get('billingAddress.street');}
+  get billingCity() {return this.checkoutFormGroup.get('billingAddress.city');}
+  get billingCountry() {return this.checkoutFormGroup.get('billingAddress.country');}
+  get billingState() {return this.checkoutFormGroup.get('billingAddress.state');}
+  get billingZipCode() {return this.checkoutFormGroup.get('billingAddress.zipCode');}
   get cardType() {return this.checkoutFormGroup.get('creditCard.cardType');}
   get cardName() {return this.checkoutFormGroup.get('creditCard.cardName');}
   get cardNumber() {return this.checkoutFormGroup.get('creditCard.cardNumber');}
