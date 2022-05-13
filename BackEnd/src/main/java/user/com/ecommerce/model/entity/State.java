@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "STATE")
+@Table(name = "STATES")
 @Entity
 @Getter
 @Setter

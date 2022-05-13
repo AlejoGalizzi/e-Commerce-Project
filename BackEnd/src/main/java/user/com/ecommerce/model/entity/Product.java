@@ -16,7 +16,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "PRODUCTS")
 @Setter
 @Getter
 public class Product {
