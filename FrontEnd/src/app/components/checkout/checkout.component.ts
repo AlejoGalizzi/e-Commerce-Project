@@ -5,6 +5,7 @@ import { Country } from 'src/app/common/country';
 import { CustomValidators } from 'src/app/validators/custom-validators';
 import { State } from 'src/app/common/state';
 import { ShopFormService } from 'src/app/services/shop-form.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,11 +23,12 @@ export class CheckoutComponent implements OnInit {
   billingStates: State[] = [];
 
 
-  totalPrice: number = 0;
+  totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
   constructor(private formBuilder: FormBuilder,
-    private shopFormService: ShopFormService) { }
+    private shopFormService: ShopFormService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
 
@@ -102,6 +104,17 @@ export class CheckoutComponent implements OnInit {
         this.creditCardYears = data;
       }
     );
+    
+    this.updateCartStatus();
+  }
+
+  updateCartStatus() {
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
+    );
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    )
   }
 
   handleMonthAndYears() {
