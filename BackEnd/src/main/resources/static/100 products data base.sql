@@ -5,21 +5,90 @@ DROP SCHEMA IF EXISTS `ecommerce`;
 CREATE SCHEMA `ecommerce`;
 USE `ecommerce` ;
 
+CREATE TABLE category(
+	category_id BIGINT not null AUTO_INCREMENT,
+    name VARCHAR(255) not null,
+    primary key (category_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
+
 CREATE TABLE country (
-	country_id smallint unsigned not null AUTO_INCREMENT unique,
+	country_id bigint unsigned not null AUTO_INCREMENT unique,
     code varchar(2) default null,
     name varchar(255) default null,
     primary key (country_id)
-) Engine=InnoDB AUTO_INCREMENT = 1;
+)Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE customer (
+	customer_id bigint not null AUTO_INCREMENT,
+    first_name VARCHAR(255) not null,
+    last_name VARCHAR(255) not null,
+    email VARCHAR(255) not null,
+    primary key (customer_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE address (
+	address_id bigint not null AUTO_INCREMENT,
+    city VARCHAR(255) not null,
+    country VARCHAR(255) not null,
+    state VARCHAR(255) not null,
+    street VARCHAR(255) not null,
+    zip_code VARCHAR(255) not null,
+    primary key (address_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE product(
+	product_id bigint not null AUTO_INCREMENT,
+    active bit(1) not null,
+    date_created datetime,
+    last_updated datetime,
+    description VARCHAR(255),
+    image_url VARCHAR(255),
+    name VARCHAR(255) not null,
+    sku VARCHAR(255),
+    unit_price FLOAT not null,
+    units_in_stock INT not null,
+    category_id BIGINT,
+    primary key (product_id),
+    constraint fk_category FOREIGN KEY(category_id) references category (category_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
 
 CREATE TABLE state (
-	state_id smallint not null AUTO_INCREMENT unique,
+	state_id bigint not null AUTO_INCREMENT unique,
     name varchar(255) default null,
-    country_id smallint	unsigned not null,
+    country_id bigint	unsigned not null,
     primary key (state_id),
     key fk_country (country_id),
     constraint fk_country foreign key (country_id) REFERENCES country (country_id)
 ) Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE orders (
+	order_id bigint not null AUTO_INCREMENT,
+    order_tracking_number VARCHAR(255) not null,
+    total_price decimal(19,2) not null,
+    tota_quantity integer not null,
+    status VARCHAR(128) not null,
+    date_created DATETIME(6) not null,
+    last_updated DATETIME(6),
+    billing_address_id bigint not null,
+    shipping_address_id bigint not null,
+    customer_id bigint not null,
+    primary key (order_id),
+    constraint fk_billing FOREIGN KEY (billing_address_id) references address (address_id),
+    constraint fk_shipping FOREIGN KEY (shipping_address_id) references address (address_id),
+	constraint fk_customer FOREIGN KEY (customer_id) references customer (customer_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
+
+CREATE TABLE order_item (
+	order_item_id bigint not null AUTO_INCREMENT,
+    image_url VARCHAR(255),
+    quantity int(11) not null,
+    unit_price decimal(19,2),
+    order_id bigint not null,
+    product_id bigint not null,
+    PRIMARY KEY (order_item_id),
+    constraint fk_orders FOREIGN KEY (order_id) references orders (order_id),
+    constraint fk_product FOREIGN KEY (product_id) references product (product_id)
+)Engine=InnoDB AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Categories
