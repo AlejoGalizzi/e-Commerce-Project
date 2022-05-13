@@ -1,6 +1,5 @@
 package user.com.ecommerce.model.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
