@@ -1,6 +1,5 @@
 package user.com.ecommerce.service;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import javax.transaction.Transactional;
@@ -21,9 +20,6 @@ public class CheckoutService implements ICheckout {
   @Autowired
   private ICustomerRepository customerRepository;
 
-  @Autowired
-  private IOrderRepository orderRepository;
-
   @Override
   @Transactional
   public PurchaseResponse placeOrder(Purchase purchase) {
@@ -42,7 +38,6 @@ public class CheckoutService implements ICheckout {
     Customer customer = purchase.getCustomer();
     customer.add(order);
 
-    orderRepository.save(order);
     customerRepository.save(customer);
 
     return new PurchaseResponse(orderTrackingNumber);
