@@ -29,22 +29,22 @@ public class Product {
   @Column(name = "SKU")
   private String sku;
 
-  @Column(name = "NAME",nullable = false)
+  @Column(name = "NAME")
   private String name;
 
   @Column(name = "DESCRIPTION")
   private String description;
 
-  @Column(name = "UNIT_PRICE", nullable = false)
+  @Column(name = "UNIT_PRICE")
   private float unitPrice;
 
   @Column(name = "IMAGE_URL")
   private String imageUrl;
 
-  @Column(name = "ACTIVE", nullable = false)
+  @Column(name = "ACTIVE")
   private boolean active;
 
-  @Column(name = "UNITS_IN_STOCK", nullable = false)
+  @Column(name = "UNITS_IN_STOCK")
   private Integer unitsInStock;
 
   @ManyToOne

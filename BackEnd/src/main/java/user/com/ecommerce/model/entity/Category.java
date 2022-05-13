@@ -23,7 +23,7 @@ public class Category {
   @Column(name = "CATEGORY_ID", nullable = false)
   private long id;
 
-  @Column(name = "NAME", unique = true, nullable = false)
+  @Column(name = "NAME", unique = true)
   private String name;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

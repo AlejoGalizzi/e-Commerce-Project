@@ -12,10 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Table(name = "CUSTOMERS")
 @Entity
-@Data
+@Getter
+@Setter
 public class Customer {
 
   @Id
@@ -23,12 +26,13 @@ public class Customer {
   @Column(name = "customer_id", nullable = false)
   private long id;
 
-  @Column(name = "first_name", nullable = false)
+  @Column(name = "first_name")
   private String firstName;
 
-  @Column(name = "last_name", nullable = false)
+  @Column(name = "last_name")
   private String lastName;
 
+  @Column(name = "email")
   private String email;
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

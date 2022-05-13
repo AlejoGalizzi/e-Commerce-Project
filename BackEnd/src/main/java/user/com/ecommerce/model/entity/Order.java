@@ -15,12 +15,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Table(name = "ORDERS")
 @Entity
-@Data
+@Getter
+@Setter
 public class Order {
 
   @Id
@@ -28,13 +31,13 @@ public class Order {
   @Column(name = "order_id", nullable = false)
   private long id;
 
-  @Column(name = "order_tracking_number", nullable = false)
+  @Column(name = "order_tracking_number")
   private String orderTrackingNumber;
 
-  @Column(name = "total_quantity", nullable = false)
+  @Column(name = "total_quantity")
   private Integer totalQuantity;
 
-  @Column(name = "total_price", nullable = false)
+  @Column(name = "total_price")
   private float totalPrice;
 
   private String status;
@@ -50,11 +53,11 @@ public class Order {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
   private Set<OrderItem> orderItems = new HashSet<>();
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "SHIPPING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
   private Address shippingAddress;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "BILLING_ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
   private Address billingAddress;
 
