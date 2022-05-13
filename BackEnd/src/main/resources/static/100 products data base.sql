@@ -28,26 +28,26 @@ CREATE TABLE customers (
 
 CREATE TABLE addresses (
 	address_id bigint not null AUTO_INCREMENT,
-    city VARCHAR(255) not null,
-    country VARCHAR(255) not null,
-    state VARCHAR(255) not null,
-    street VARCHAR(255) not null,
-    zip_code VARCHAR(255) not null,
+    city VARCHAR(255) default null,
+    country VARCHAR(255) default null,
+    state VARCHAR(255) default null,
+    street VARCHAR(255) default null,
+    zip_code VARCHAR(255) default null,
     primary key (address_id)
 )Engine=InnoDB AUTO_INCREMENT = 1;
 
 CREATE TABLE products(
 	product_id bigint not null AUTO_INCREMENT,
-    active bit(1) not null,
-    date_created datetime,
-    last_updated datetime,
-    description VARCHAR(255),
-    image_url VARCHAR(255),
-    name VARCHAR(255) not null,
-    sku VARCHAR(255),
-    unit_price FLOAT not null,
-    units_in_stock INT not null,
-    category_id BIGINT,
+    active bit(1) default null,
+    date_created datetime default null,
+    last_updated datetime default null,
+    description VARCHAR(255) default null,
+    image_url VARCHAR(255) default null,
+    name VARCHAR(255) default null,
+    sku VARCHAR(255) default null,
+    unit_price FLOAT default null,
+    units_in_stock INT default null,
+    category_id BIGINT default null,
     primary key (product_id),
     constraint fk_category FOREIGN KEY(category_id) references categories (category_id)
 )Engine=InnoDB AUTO_INCREMENT = 1;
@@ -55,7 +55,7 @@ CREATE TABLE products(
 CREATE TABLE states (
 	state_id bigint not null AUTO_INCREMENT unique,
     name varchar(255) default null,
-    country_id bigint	unsigned not null,
+    country_id bigint default null,
     primary key (state_id),
     key fk_country (country_id),
     constraint fk_country foreign key (country_id) REFERENCES countries (country_id)
@@ -63,15 +63,15 @@ CREATE TABLE states (
 
 CREATE TABLE orders (
 	order_id bigint not null AUTO_INCREMENT,
-    order_tracking_number VARCHAR(255) not null,
-    total_price decimal(19,2) not null,
-    tota_quantity integer not null,
-    status VARCHAR(128) not null,
-    date_created DATETIME(6) not null,
-    last_updated DATETIME(6),
-    billing_address_id bigint not null,
-    shipping_address_id bigint not null,
-    customer_id bigint not null,
+    order_tracking_number VARCHAR(255) default null,
+    total_price decimal(19,2) default null,
+    tota_quantity integer default null,
+    status VARCHAR(128) default null,
+    date_created DATETIME(6) default null,
+    last_updated DATETIME(6) default null,
+    billing_address_id bigint default null,
+    shipping_address_id bigint default null,
+    customer_id bigint default null,
     primary key (order_id),
     constraint fk_billing FOREIGN KEY (billing_address_id) references addresses (address_id),
     constraint fk_shipping FOREIGN KEY (shipping_address_id) references addresses (address_id),
@@ -80,11 +80,11 @@ CREATE TABLE orders (
 
 CREATE TABLE order_items (
 	order_item_id bigint not null AUTO_INCREMENT,
-    image_url VARCHAR(255),
-    quantity int(11) not null,
-    unit_price decimal(19,2),
-    order_id bigint not null,
-    product_id bigint not null,
+    image_url VARCHAR(255) default null,
+    quantity int(11) default null,
+    unit_price decimal(19,2) default null,
+    order_id bigint default null,
+    product_id bigint default null,
     PRIMARY KEY (order_item_id),
     constraint fk_orders FOREIGN KEY (order_id) references orders (order_id),
     constraint fk_product FOREIGN KEY (product_id) references products (product_id)
