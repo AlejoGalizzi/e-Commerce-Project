@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Event } from '@angular/router';
+import { Event, Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { CustomValidators } from 'src/app/validators/custom-validators';
 import { State } from 'src/app/common/state';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
+import { Order } from 'src/app/common/order';
+import { OrderItem } from 'src/app/common/order-item';
+import { Purchase } from 'src/app/common/purchase';
 
 @Component({
   selector: 'app-checkout',
@@ -28,7 +32,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private shopFormService: ShopFormService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private checkoutService: CheckoutService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -44,7 +50,7 @@ export class CheckoutComponent implements OnInit {
             CustomValidators.notOnlyWhiteSpace]),
         email: new FormControl('',
           [Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2-4}$'),
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
           CustomValidators.notOnlyWhiteSpace])
       }),
       shippingAddress: this.formBuilder.group({
@@ -152,18 +158,57 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Handling the submit button");
-    console.log(this.checkoutFormGroup.get('customer')!.value);
-    console.log("The email address is" + this.checkoutFormGroup.get('customer').value.email);
-    console.log("The shipping address country is: " + this.checkoutFormGroup.get('shippingAddress').value.country.name);
-    console.log("The shipping address state is: " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
-
     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
 
-    console.log("CheckoutFormGroup is valid: "+ this.checkoutFormGroup.valid);
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+    const cartItems = this.cartService.cartItems;
+    let orderItems: OrderItem[] = cartItems.map(tempItem => new OrderItem(tempItem));
+    let purchase = new Purchase();
+
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+
+    purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
+    const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
+    const shippingCountry: Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    purchase.shippingAddress.state = shippingState.name;
+    purchase.shippingAddress.country = shippingCountry.name;
+
+    purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
+    const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
+    const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
+    purchase.billingAddress.state = billingState.name;
+    purchase.billingAddress.country = billingCountry.name;
+
+    purchase.orderItems = orderItems;
+    purchase.order = order;
+
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: respone => {
+          alert(`Your order have been received. \nYour order tracking number is: ${respone.orderTrackingNumber}`);
+
+          this.resteCart();
+        },
+        error: err => {
+          alert(`There was an error: ${err.message}`)
+        }
+      }
+    );
     
+  }
+  resteCart() {
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+
+    this.checkoutFormGroup.reset();
+
+    this.router.navigateByUrl("/products");
   }
 
   copyShippingAddressToBillingAddress(event) {
