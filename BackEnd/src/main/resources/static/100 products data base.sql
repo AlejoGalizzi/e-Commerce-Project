@@ -12,7 +12,7 @@ CREATE TABLE categories(
 )Engine=InnoDB AUTO_INCREMENT = 1;
 
 CREATE TABLE countries (
-	country_id bigint unsigned not null AUTO_INCREMENT unique,
+	country_id bigint not null AUTO_INCREMENT unique,
     code varchar(2) default null,
     name varchar(255) default null,
     primary key (country_id)
@@ -55,7 +55,7 @@ CREATE TABLE products(
 CREATE TABLE states (
 	state_id bigint not null AUTO_INCREMENT unique,
     name varchar(255) default null,
-    country_id bigint default null,
+    country_id bigint not null,
     primary key (state_id),
     key fk_country (country_id),
     constraint fk_country foreign key (country_id) REFERENCES countries (country_id)
@@ -65,7 +65,7 @@ CREATE TABLE orders (
 	order_id bigint not null AUTO_INCREMENT,
     order_tracking_number VARCHAR(255) default null,
     total_price decimal(19,2) default null,
-    tota_quantity integer default null,
+    total_quantity integer default null,
     status VARCHAR(128) default null,
     date_created DATETIME(6) default null,
     last_updated DATETIME(6) default null,
