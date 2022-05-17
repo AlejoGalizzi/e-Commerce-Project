@@ -22,7 +22,7 @@ CREATE TABLE customers (
 	customer_id bigint not null AUTO_INCREMENT,
     first_name VARCHAR(255) not null,
     last_name VARCHAR(255) not null,
-    email VARCHAR(255) not null,
+    email VARCHAR(255) not null unique,
     primary key (customer_id)
 )Engine=InnoDB AUTO_INCREMENT = 1;
 

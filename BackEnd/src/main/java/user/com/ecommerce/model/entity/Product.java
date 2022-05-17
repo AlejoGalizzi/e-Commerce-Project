@@ -1,4 +1,4 @@
-package user.com.ecommerce.model.entity;
+package user.com.ecommerce.repository.model.entity;
 
 import java.sql.Timestamp;
 import javax.persistence.Column;
