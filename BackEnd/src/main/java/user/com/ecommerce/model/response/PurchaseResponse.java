@@ -1,4 +1,4 @@
-package user.com.ecommerce.repository.model.response;
+package user.com.ecommerce.model.response;
 
 import lombok.Data;
 

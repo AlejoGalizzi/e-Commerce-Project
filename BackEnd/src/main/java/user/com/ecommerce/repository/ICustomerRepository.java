@@ -1,4 +1,4 @@
-package user.com.ecommerce.controller.repository;
+package user.com.ecommerce.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import user.com.ecommerce.model.entity.Customer;
