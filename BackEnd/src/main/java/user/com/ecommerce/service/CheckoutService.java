@@ -11,7 +11,6 @@ import user.com.ecommerce.model.entity.Order;
 import user.com.ecommerce.model.entity.OrderItem;
 import user.com.ecommerce.model.response.PurchaseResponse;
 import user.com.ecommerce.repository.ICustomerRepository;
-import user.com.ecommerce.repository.IOrderRepository;
 import user.com.ecommerce.service.abstraction.ICheckout;
 
 @Service
@@ -36,8 +35,12 @@ public class CheckoutService implements ICheckout {
     order.setBillingAddress(purchase.getBillingAddress());
 
     Customer customer = purchase.getCustomer();
-    customer.add(order);
+    Customer customerFromDB = customerRepository.findByEmail(customer.getEmail());
+    if(customerFromDB != null){
+      customer = customerFromDB;
+    }
 
+    customer.add(order);
     customerRepository.save(customer);
 
     return new PurchaseResponse(orderTrackingNumber);
