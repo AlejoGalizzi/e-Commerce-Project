@@ -12,7 +12,7 @@
             <button (click)="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
           </div>
         </div>
-        <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+        <div *ngIf="products.length == 0" class="alert alert-warning col-md-12" role="alert">
           No products found.
         </div>
       </div>
@@ -38,10 +38,8 @@
                 </select>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   </div>

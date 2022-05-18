@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [];
   previouseKeywordSearched: string;
   currentCategoryId: number = 1;
   previousCategoryId: number = 1;
