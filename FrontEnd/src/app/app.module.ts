@@ -31,6 +31,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 
 import myAppConfig from './config/my-app-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const oktaConfig = Object.assign({
 
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
 
+  {path: 'orders', component: OrderHistoryComponent, canActivate: [OktaAuthGuard]},
   {path: 'members', component: MembersPageComponent, canActivate: [OktaAuthGuard]},
   { path: 'category/:id/:name', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
@@ -74,7 +76,8 @@ const routes: Routes = [
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
-    MembersPageComponent
+    MembersPageComponent,
+    OrderHistoryComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
