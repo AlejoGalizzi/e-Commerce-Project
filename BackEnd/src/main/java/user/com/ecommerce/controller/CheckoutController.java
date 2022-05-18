@@ -12,7 +12,6 @@ import user.com.ecommerce.model.response.PurchaseResponse;
 import user.com.ecommerce.service.CheckoutService;
 import user.com.ecommerce.service.abstraction.ICheckout;
 
-@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
