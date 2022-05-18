@@ -7,7 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import user.com.ecommerce.model.entity.State;
 
-@CrossOrigin("http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "states", path = "states")
 public interface IStateRepository extends JpaRepository<State, Long> {
   List<State> findByCountryCode(@Param("code") String code);
