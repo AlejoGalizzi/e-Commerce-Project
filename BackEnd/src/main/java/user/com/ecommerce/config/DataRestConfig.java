@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -22,6 +23,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
   @Autowired
   private EntityManager entityManager;
 
+  @Value("${allowed.origins}")
+  private String[] allowedOrigins;
+
   @Override
   public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config,
       CorsRegistry cors) {
@@ -33,7 +37,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
     disableHttpMethods(Country.class,config, unsupportedActions);
     disableHttpMethods(State.class,config, unsupportedActions);
 
-    cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
+    cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
 
     exposeIds(config);
   }
