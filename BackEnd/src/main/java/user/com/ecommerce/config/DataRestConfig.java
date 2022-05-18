@@ -30,8 +30,8 @@ public class DataRestConfig implements RepositoryRestConfigurer {
   public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config,
       CorsRegistry cors) {
 
-    HttpMethod[] unsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE};
-
+    HttpMethod[] unsupportedActions = {HttpMethod.PUT, HttpMethod.POST,
+        HttpMethod.DELETE, HttpMethod.PATCH};
     disableHttpMethods(Product.class,config, unsupportedActions);
     disableHttpMethods(Category.class,config, unsupportedActions);
     disableHttpMethods(Country.class,config, unsupportedActions);
