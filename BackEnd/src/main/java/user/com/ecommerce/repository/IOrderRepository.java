@@ -11,5 +11,5 @@ import user.com.ecommerce.model.entity.Order;
 @RepositoryRestResource(collectionResourceRel = "orders", path = "orders")
 public interface IOrderRepository extends JpaRepository<Order,Long> {
 
-  Page<Order> findByCustomerEmail(@Param("email")String email, Pageable pageable);
+  Page<Order> findByCustomerEmailOrderByDateCreatedDesc(@Param("email")String email, Pageable pageable);
 }
