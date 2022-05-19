@@ -26,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   shippingStates: State[] = [];
   billingStates: State[] = [];
 
+  storage: Storage = sessionStorage;
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
@@ -38,6 +39,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const email = JSON.parse(this.storage.getItem('userEmail'));
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', 
@@ -48,7 +51,7 @@ export class CheckoutComponent implements OnInit {
           [Validators.required,
             Validators.minLength(2),
             CustomValidators.notOnlyWhiteSpace]),
-        email: new FormControl('',
+        email: new FormControl(email,
           [Validators.required,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
           CustomValidators.notOnlyWhiteSpace])
@@ -192,7 +195,7 @@ export class CheckoutComponent implements OnInit {
         next: respone => {
           alert(`Your order have been received. \nYour order tracking number is: ${respone.orderTrackingNumber}`);
 
-          this.resteCart();
+          this.resetCart();
         },
         error: err => {
           alert(`There was an error: ${err.message}`)
@@ -201,11 +204,11 @@ export class CheckoutComponent implements OnInit {
     );
     
   }
-  resteCart() {
+  resetCart() {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-
+    this.cartService.persistCartItems();
     this.checkoutFormGroup.reset();
 
     this.router.navigateByUrl("/products");
