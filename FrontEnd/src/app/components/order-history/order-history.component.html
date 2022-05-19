@@ -4,22 +4,24 @@
       <h3>Your Orders</h3>
       <div *ngIf="orderHistories.length > 0">
         <table class="table table-bordered">
-          <tr>
-            <th width="20%">Order Tracking Number</th>
-            <th width="10%">Total Price</th>
-            <th width="10%">Total Quantity</th>
-            <th width="10%">Date Created</th>
-          </tr>
-          <tr *ngFor="let order of orderHistories">
-            <td>{{order.orderTrackingNumber}}</td>
-            <td>{{order.totalPrice | currency: 'USD'}}</td>
-            <td>{{order.totalQuantity}}</td>
-            <td>{{order.dateCreated | date: 'short'}}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th width="20%">Order Tracking Number</th>
+              <th width="10%">Total Price</th>
+              <th width="10%">Total Quantity</th>
+              <th width="10%">Date Created</th>
+            </tr>
+            <tr *ngFor="let order of orderHistories">
+              <td>{{order.orderTrackingNumber}}</td>
+              <td>{{order.totalPrice | currency: 'USD'}}</td>
+              <td>{{order.totalQuantity}}</td>
+              <td>{{order.dateCreated | date: 'short'}}</td>
+            </tr>
+        </tbody>
         </table>
       </div>
       <div *ngIf="orderHistories.length == 0" class="alert alert-warning clo-md-12" role="alert">
-        No orders made
+        No orders found.
       </div>
     </div>
   </div>
