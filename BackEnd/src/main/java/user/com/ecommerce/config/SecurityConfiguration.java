@@ -20,5 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     httpSecurity.cors();
 
     Okta.configureResourceServer401ResponseBody(httpSecurity);
+
+    httpSecurity.csrf().disable();
   }
 }
