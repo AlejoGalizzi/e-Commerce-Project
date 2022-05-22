@@ -24,7 +24,7 @@ The database originaly is empty but you could load 100 rows with the script loca
 stripeProperties:
   key: Your stripe key</code></pre>
   
- - my-app-config.ts ():
+ - my-app-config.ts (FrontEnd side inside a new folder called "config" into src frontend's folder):
  <pre><code>export default {
  
   oidc: {
