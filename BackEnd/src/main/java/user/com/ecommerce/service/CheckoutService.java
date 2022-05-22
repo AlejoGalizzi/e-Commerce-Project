@@ -72,6 +72,7 @@ public class CheckoutService implements ICheckout {
     params.put("amount",paymentInfo.getAmount());
     params.put("currency",paymentInfo.getCurrency());
     params.put("payment_method_types",paymentMethodTypes);
+    params.put("description", "e-Commerce purchase");
 
 
     return PaymentIntent.create(params);
