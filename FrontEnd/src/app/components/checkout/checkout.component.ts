@@ -25,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   paymentInfo: PaymentInfo = new PaymentInfo();
   cardElement: any;
   displayError: any = "";
+  isDisabled: boolean = false;
 
   checkoutFormGroup: FormGroup;
 
@@ -183,6 +184,7 @@ export class CheckoutComponent implements OnInit {
 
     if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
       
+      this.isDisabled = true;
 
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
@@ -206,14 +208,17 @@ export class CheckoutComponent implements OnInit {
           .then(function(result) {
             if (result.error) {
               alert(`There was an error: ${result.error.message}`);
+              this.isDisabled = false;
             } else {
               this.checkoutService.placeOrder(purchase).subscribe({
                 next: response => {
                   alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
                   this.resetCart();
+                  this.isDisabled = false;
                 },
                 error: err => {
                   alert(`There was an error: ${err.message}`);
+                  this.isDisabled = false;
                 }
               })
             }            
