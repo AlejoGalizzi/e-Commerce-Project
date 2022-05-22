@@ -3,6 +3,7 @@ package user.com.ecommerce.service;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +30,9 @@ public class CheckoutService implements ICheckout {
   @Autowired
   private ICustomerRepository customerRepository;
 
-  @Value("${stripe.key.secret}")
-  private String secret;
+  public CheckoutService(@Value("${stripe.key.secret}") String secretKey){
+    Stripe.apiKey = secretKey;
+  }
 
   @Override
   @Transactional
@@ -62,14 +64,15 @@ public class CheckoutService implements ICheckout {
   @Override
   public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
 
-    List<String> paymentMethodTypes = Arrays.asList("card");
+    List<String> paymentMethodTypes = new ArrayList<>();
+    paymentMethodTypes.add("card");
 
     Map<String, Object> params = new HashMap<>();
 
     params.put("amount",paymentInfo.getAmount());
     params.put("currency",paymentInfo.getCurrency());
-    params.put("payment_method_type",paymentMethodTypes);
-    Stripe.apiKey = secret;
+    params.put("payment_method_types",paymentMethodTypes);
+
 
     return PaymentIntent.create(params);
   }
